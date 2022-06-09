@@ -4,18 +4,6 @@ import { Link } from "react-router-dom";
 import "./home.css";
 import Product_PK from "../../components/Product_PK/Product_PK";
 import Banner from "../../components/Banner/Banner";
-import ImageBanner1 from "../../assets/img/xxxbanner1.webp";
-import ImageBanner2 from "../../assets/img/xxxbanner2.webp";
-import ImageBanner3 from "../../assets/img/xxxbanner3.webp";
-import ImageBanner4 from "../../assets/img/xxxbanner4.webp";
-import ImageBanner5 from "../../assets/img/banner2.webp";
-import ImageBanner6 from "../../assets/img/banner3.webp";
-import ImageBanner7 from "../../assets/img/banner4.webp";
-import ImageBanner8 from "../../assets/img/banner5.webp";
-import ImageBanner9 from "../../assets/img/banner6.webp";
-import ImageBanner10 from "../../assets/img/banner7.webp";
-import ImageBanner11 from "../../assets/img/banner8.webp";
-import ImageBanner12 from "../../assets/img/banner9.webp";
 import SlideProduct from "../../components/Slider/slideproduct";
 import axiosClient from "../../helper/axiosClient";
 

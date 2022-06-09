@@ -216,42 +216,22 @@ const Header = () => {
                   <ul class="header-category-list">
                     <Link to="/Products/Novel">
                       <li class="header-category-item">
-                        {/* <img
-                          src={laptop}
-                          alt=""
-                          class="header-category-item-img"
-                        /> */}
                         <span>Novel</span>
                       </li>
                     </Link>
                     <Link to="/Products/Comic">
                       <li class="header-category-item">
-                        <img
-                          src={manhinh}
-                          alt=""
-                          class="header-category-item-img"
-                        />
                         <span>Comic</span>
                       </li>
                     </Link>
                     <Link to="/Products/SoftSkill">
                       <li class="header-category-item">
-                        <img
-                          src={chuot}
-                          alt=""
-                          class="header-category-item-img"
-                        />
                         <span>SoftSkill</span>
                       </li>
                     </Link>
-                    <Link to="/Products/Anime">
+                    <Link to="/Products/Finance">
                       <li class="header-category-item">
-                        <img
-                          src={banphim}
-                          alt=""
-                          class="header-category-item-img"
-                        />
-                        <span>Anime</span>
+                        <span>Finance</span>
                       </li>
                     </Link>
                     <Link to="/Products/Manga">

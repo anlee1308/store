@@ -4,6 +4,12 @@
     margin: 0 auto;
 }
 
+
+.col-12.p-0 .slick-slide img {
+/* width: 100% !important; */
+height: 100% !important;
+}
+
 .product-brand{
     background:#f1f1f1;
     padding:20px 0;

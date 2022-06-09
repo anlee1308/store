@@ -181,7 +181,7 @@ function AddProduct(props) {
           <option value="Novel">Novel</option>
           <option value="Comic">Comic</option>
           <option value="SoftSkill">SoftSkill</option>
-          <option value="Anime">Anime</option>
+          <option value="Finance">Finance</option>
           <option value="Manga">Manga</option>
         </select>
       </div>
