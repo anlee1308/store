@@ -3,21 +3,18 @@ const ProductModel = require("../model/ProductModel");
 require("dotenv").config();
 const randomstring = require("randomstring");
 
-function sortObject(o) {
-  var sorted = {},
-    key,
-    a = [];
-
-  for (key in o) {
-    if (o.hasOwnProperty(key)) {
-      a.push(key);
+function sortObject(obj) {
+  var sorted = {};
+  var str = [];
+  var key;
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      str.push(encodeURIComponent(key));
     }
   }
-
-  a.sort();
-
-  for (key = 0; key < a.length; key++) {
-    sorted[a[key]] = o[a[key]];
+  str.sort();
+  for (key = 0; key < str.length; key++) {
+    sorted[str[key]] = encodeURIComponent(obj[str[key]]).replace(/%20/g, "+");
   }
   return sorted;
 }
@@ -52,16 +49,19 @@ module.exports = {
     var secretKey = process.env.vnp_HashSecret;
     var vnpUrl = process.env.vnp_Url;
     var returnUrl = process.env.vnp_ReturnUrl;
+
     var date = new Date();
+
     var createDate = dateFormat(date, "yyyymmddHHmmss");
-    var orderId = orderSave._id + "_" + randomstring.generate(5);
+    var orderId = dateFormat(date, "HHmmss");
     var amount = price;
-    var bankCode = "NCB";
+    var bankCode = "NCB"; // or ""
 
     var orderInfo = "Thanh toan san pham";
     var locale = "vn";
     var currCode = "VND";
     var vnp_Params = {};
+
     vnp_Params["vnp_Version"] = "2.1.0";
     vnp_Params["vnp_Command"] = "pay";
     vnp_Params["vnp_TmnCode"] = tmnCode;
@@ -70,7 +70,7 @@ module.exports = {
     vnp_Params["vnp_CurrCode"] = currCode;
     vnp_Params["vnp_TxnRef"] = orderId;
     vnp_Params["vnp_OrderInfo"] = orderInfo;
-    vnp_Params["vnp_OrderType"] = 1;
+    vnp_Params["vnp_OrderType"] = "billpayment";
     vnp_Params["vnp_Amount"] = amount * 100;
     vnp_Params["vnp_ReturnUrl"] = returnUrl;
     vnp_Params["vnp_IpAddr"] = ipAddr;
@@ -85,10 +85,11 @@ module.exports = {
     var hmac = crypto.createHmac("sha512", secretKey);
     var signed = hmac.update(new Buffer(signData, "utf-8")).digest("hex");
     vnp_Params["vnp_SecureHash"] = signed;
-    vnpUrl += "?" + querystring.stringify(vnp_Params, { encode: true });
+    vnpUrl += "?" + querystring.stringify(vnp_Params, { encode: false });
     console.log(vnpUrl);
 
     //Neu muon dung Redirect thi dong dong ben duoi
+    // res.status(200).json({ data: vnpUrl });
     res.status(200).json({ code: "00", data: vnpUrl });
     //Neu muon dung Redirect thi mo dong ben duoi va dong dong ben tren
     //res.redirect(vnpUrl)
