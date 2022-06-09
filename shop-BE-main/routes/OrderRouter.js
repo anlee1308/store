@@ -13,6 +13,11 @@ Router.post(
   Authentication.isUserValid,
   OrderController.paymentOnline
 );
+Router.get(
+  "/payment/return_vnp",
+  Authentication.isUserValid,
+  OrderController.getReturnOrder
+);
 Router.get("/order", Authentication.isUserValid, OrderController.getOrder);
 Router.delete(
   "/order",

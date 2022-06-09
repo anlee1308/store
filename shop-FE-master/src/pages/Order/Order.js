@@ -13,7 +13,7 @@ function Order(props) {
     isLoading: false,
     data: [],
   });
-  const [render, setrender] = useState(false);
+  const [render, setRender] = useState(false);
   const { TabPane } = Tabs;
   const history = useHistory();
   const user = useSelector((state) => state.user);
@@ -29,7 +29,7 @@ function Order(props) {
       }).then((data) => {
         if (data.code == "00") {
           toast.success("Thanh toán thành công");
-          setrender(true);
+          setRender(true);
         } else {
           toast.error("Thanh toán thất bại");
         }
@@ -54,7 +54,7 @@ function Order(props) {
     });
   }, [render]);
   function isRender() {
-    return setrender(!render);
+    return setRender(!render);
   }
   function renderOrder(data, key) {
     let temp;

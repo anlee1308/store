@@ -3,21 +3,18 @@ const ProductModel = require("../model/ProductModel");
 require("dotenv").config();
 const randomstring = require("randomstring");
 
-function sortObject(o) {
-  var sorted = {},
-    key,
-    a = [];
-
-  for (key in o) {
-    if (o.hasOwnProperty(key)) {
-      a.push(key);
+function sortObject(obj) {
+  var sorted = {};
+  var str = [];
+  var key;
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      str.push(encodeURIComponent(key));
     }
   }
-
-  a.sort();
-
-  for (key = 0; key < a.length; key++) {
-    sorted[a[key]] = o[a[key]];
+  str.sort();
+  for (key = 0; key < str.length; key++) {
+    sorted[str[key]] = encodeURIComponent(obj[str[key]]).replace(/%20/g, "+");
   }
   return sorted;
 }
@@ -40,6 +37,7 @@ module.exports = {
       totalPrice,
     });
     var orderSave = await order.save();
+
     var ipAddr =
       req.headers["x-forwarded-for"] ||
       req.connection.remoteAddress ||
@@ -52,13 +50,16 @@ module.exports = {
     var secretKey = process.env.vnp_HashSecret;
     var vnpUrl = process.env.vnp_Url;
     var returnUrl = process.env.vnp_ReturnUrl;
-    var date = new Date();
-    var createDate = dateFormat(date, "yyyymmddHHmmss");
-    var orderId = orderSave._id + "_" + randomstring.generate(5);
-    var amount = price;
-    var bankCode = "NCB";
 
-    var orderInfo = "Thanh toan san pham";
+    var date = new Date();
+
+    var createDate = dateFormat(date, "yyyymmddHHmmss");
+    var orderId = dateFormat(date, "HHmmss");
+    var amount = totalPrice;
+    var bankCode = "NCB";
+    // var bankCode = "";
+
+    var orderInfo = "Thanhtoansanpham";
     var locale = "vn";
     var currCode = "VND";
     var vnp_Params = {};
@@ -70,12 +71,15 @@ module.exports = {
     vnp_Params["vnp_CurrCode"] = currCode;
     vnp_Params["vnp_TxnRef"] = orderId;
     vnp_Params["vnp_OrderInfo"] = orderInfo;
-    vnp_Params["vnp_OrderType"] = 1;
+    vnp_Params["vnp_OrderType"] = "billpayment";
     vnp_Params["vnp_Amount"] = amount * 100;
     vnp_Params["vnp_ReturnUrl"] = returnUrl;
     vnp_Params["vnp_IpAddr"] = ipAddr;
     vnp_Params["vnp_CreateDate"] = createDate;
-    vnp_Params["vnp_BankCode"] = bankCode;
+    // vnp_Params["vnp_BankCode"] = bankCode;
+    if (bankCode !== null && bankCode !== "") {
+      vnp_Params["vnp_BankCode"] = bankCode;
+    }
 
     vnp_Params = sortObject(vnp_Params);
 
@@ -84,14 +88,45 @@ module.exports = {
     var crypto = require("crypto");
     var hmac = crypto.createHmac("sha512", secretKey);
     var signed = hmac.update(new Buffer(signData, "utf-8")).digest("hex");
+
     vnp_Params["vnp_SecureHash"] = signed;
-    vnpUrl += "?" + querystring.stringify(vnp_Params, { encode: true });
+    vnpUrl += "?" + querystring.stringify(vnp_Params, { encode: false });
     console.log(vnpUrl);
 
     //Neu muon dung Redirect thi dong dong ben duoi
+    // res.json(vnpUrl);
     res.status(200).json({ code: "00", data: vnpUrl });
     //Neu muon dung Redirect thi mo dong ben duoi va dong dong ben tren
     //res.redirect(vnpUrl)
+  },
+
+  getReturnOrder: async (req, res) => {
+    var vnp_Params = req.query;
+
+    var secureHash = vnp_Params["vnp_SecureHash"];
+
+    delete vnp_Params["vnp_SecureHash"];
+    delete vnp_Params["vnp_SecureHashType"];
+
+    vnp_Params = sortObject(vnp_Params);
+
+    var config = require("config");
+    var tmnCode = config.get("vnp_TmnCode");
+    var secretKey = config.get("vnp_HashSecret");
+
+    var querystring = require("qs");
+    var signData = querystring.stringify(vnp_Params, { encode: false });
+    var crypto = require("crypto");
+    var hmac = crypto.createHmac("sha512", secretKey);
+    var signed = hmac.update(new Buffer(signData, "utf-8")).digest("hex");
+
+    if (secureHash === signed) {
+      //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
+
+      res.render("success", { code: 00, data: "sucess" });
+    } else {
+      res.render("success", { code: "97", data: "failure" });
+    }
   },
   // handle payment offline
   paymentOffline: async (req, res) => {

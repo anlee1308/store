@@ -32,9 +32,6 @@ const port = process.env.PORT || 8000;
 app.use("/api/auth", UserRouter);
 app.use("/api", ProductRouter);
 app.use("/api/auth", OrderRouter);
-app.get("/", (req, res) => {
-  res.send("hello world");
-});
 app.listen(port, () => {
   console.log(`Server đã chạy trên port ${port}`);
 });
