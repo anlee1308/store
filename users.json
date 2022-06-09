@@ -1,0 +1,139 @@
+[{
+  "_id": {
+    "$oid": "60b73783181aea7e841a47ae"
+  },
+  "createdBy": {
+    "$date": {
+      "$numberLong": "1622620035517"
+    }
+  },
+  "updatedBy": {
+    "$date": {
+      "$numberLong": "1622620035517"
+    }
+  },
+  "username": "admin",
+  "name": "admin",
+  "password": "$2b$10$r03ydJ40mcHVATQm0.0eluixZf9.iJsSC2f/4Kf3tSMHgyg1hmyDy",
+  "phone": "77777777777",
+  "email": "",
+  "image": "https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_632,h_316/https://gocsuckhoe.com/wp-content/uploads/2020/09/avatar-facebook-632x316.jpg",
+  "role": "ADMIN",
+  "enable": true,
+  "verificationcode": "af79164a-1937-4579-85d7-8d84129209ae",
+  "_class": "com.example.demo.model.UserModel"
+},{
+  "_id": {
+    "$oid": "60db245b59621922550b5760"
+  },
+  "createdBy": {
+    "$date": {
+      "$numberLong": "1624974427777"
+    }
+  },
+  "updatedBy": {
+    "$date": {
+      "$numberLong": "1624974427777"
+    }
+  },
+  "username": "anlee13",
+  "name": "anlee13",
+  "password": "$2b$10$r03ydJ40mcHVATQm0.0eluixZf9.iJsSC2f/4Kf3tSMHgyg1hmyDy",
+  "email": "18520427@gm.uit.edu.vn",
+  "image": "https://lh3.googleusercontent.com/a/AATXAJypBL7ch-htnpplUKNmpU9mW_0iYzgaogoYq6P9=s96-c",
+  "role": "USER",
+  "enable": true,
+  "_class": "com.example.demo.model.UserModel"
+},{
+  "_id": {
+    "$oid": "60db248759621922550b5761"
+  },
+  "createdBy": {
+    "$date": {
+      "$numberLong": "1624974471816"
+    }
+  },
+  "updatedBy": {
+    "$date": {
+      "$numberLong": "1624974471816"
+    }
+  },
+  "username": "lvanqb@gmail.com",
+  "name": "baby boy",
+  "password": "$2b$10$r03ydJ40mcHVATQm0.0eluixZf9.iJsSC2f/4Kf3tSMHgyg1hmyDy",
+  "phone": "03213752",
+  "email": "lvanqb@gmail.com",
+  "image": "https://radiant-wave-89582.herokuapp.com/image/facebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-e4abd14d.jpg",
+  "role": "USER",
+  "enable": true,
+  "forgotpassword": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuZ3V5ZW5kdWNkdW5nZzEyQGdtYWlsLmNvbSIsImlhdCI6MTYyNTAxNjk4MCwiZXhwIjoxNjI1MDIwNTgwfQ.matbXqnrQmSIdMMMbbrIFl_5JoeP64YEefjOAcB8HuxScQOeDLK9G80tlOrMhwR7M7R_5uVCTdYBvbZwD8pnxA",
+  "ngaysinh": "2021-06-11",
+  "sex": "2",
+  "_class": "com.example.demo.model.UserModel"
+},{
+  "_id": {
+    "$oid": "60dbccc803268b429857d2e2"
+  },
+  "createdBy": {
+    "$date": {
+      "$numberLong": "1625017544378"
+    }
+  },
+  "updatedBy": {
+    "$date": {
+      "$numberLong": "1625017544378"
+    }
+  },
+  "username": "pro111",
+  "name": "pro111",
+  "password": "$2b$10$r03ydJ40mcHVATQm0.0eluixZf9.iJsSC2f/4Kf3tSMHgyg1hmyDy",
+  "phone": "0377752897",
+  "email": "lvanqb1@gmail.com",
+  "image": "https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_632,h_316/https://gocsuckhoe.com/wp-content/uploads/2020/09/avatar-facebook-632x316.jpg",
+  "role": "USER",
+  "enable": true,
+  "verificationcode": "bdff3446-e53c-49ab-806d-4cfe9c2ade4a",
+  "_class": "com.example.demo.model.UserModel"
+},{
+  "_id": {
+    "$oid": "6234a9b7f802f70016657620"
+  },
+  "username": "nhoxbuonlv3",
+  "password": "$2b$10$r03ydJ40mcHVATQm0.0eluixZf9.iJsSC2f/4Kf3tSMHgyg1hmyDy",
+  "name": "nhoxbuonlv3",
+  "phone": "+84987654321",
+  "email": "nhoxbuonlv3@gmail.com",
+  "role": "USER",
+  "image": "https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_632,h_316/https://gocsuckhoe.com/wp-content/uploads/2020/09/avatar-facebook-632x316.jpg",
+  "verificationcode": "nlSzpQMJZFs4hzNW",
+  "enable": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "623abdb382522f0016f37f8e"
+  },
+  "username": "chubedan123",
+  "password": "$2b$10$5plCYHh3NEZewQHIvhjNquKosOw9ztH8z27L.8gYLeCTywrHTfaZS",
+  "name": "chubedan123",
+  "phone": "+84987654321",
+  "email": "nhoxbuon@gmail.com",
+  "role": "USER",
+  "image": "https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_632,h_316/https://gocsuckhoe.com/wp-content/uploads/2020/09/avatar-facebook-632x316.jpg",
+  "verificationcode": "OnB3FPJRPt75L0K3",
+  "enable": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "623af541fa184d0016491b0b"
+  },
+  "username": "D423678",
+  "password": "$2b$10$4XZMjXSvHVufZQFFU47f..YMyuQzC/LomTjNhZO0Zly1amOWmj/p6",
+  "name": "D423678",
+  "phone": "0836513",
+  "email": "nhoxbuonlv4@gmail.com",
+  "role": "USER",
+  "image": "https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_632,h_316/https://gocsuckhoe.com/wp-content/uploads/2020/09/avatar-facebook-632x316.jpg",
+  "verificationcode": "TTm11A6tNGatXrKJ",
+  "enable": true,
+  "__v": 0
+}]
