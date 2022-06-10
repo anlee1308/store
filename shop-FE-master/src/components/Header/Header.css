@@ -358,7 +358,7 @@ nav{
 .slick-slide img {
     display: block !important;
     height: 207px !important;
-    object-fit: contain !important;
+    object-fit:contain !important;
 }
 
 .header-categore-dropdown:after{

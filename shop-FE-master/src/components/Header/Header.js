@@ -27,9 +27,9 @@ const Header = () => {
   const product = useSelector((state) => state.cart) || [];
   const user = useSelector((state) => state.user);
   const [HideHeader, setHideHeader] = useState(false);
-  const [userDropdown, setuserDropdown] = useState(false);
+  const [userDropdown, setUserDropDown] = useState(false);
   function DropdownUser() {
-    setuserDropdown(!userDropdown);
+    setUserDropDown(!userDropdown);
   }
   useEffect(() => {
     window.addEventListener("scroll", (e) => {
@@ -40,15 +40,15 @@ const Header = () => {
       }
     });
   }, []);
-  const [searchValue, setsearchValue] = useState(null);
+  const [searchValue, setSearchValue] = useState(null);
   function onChangeValue(e) {
-    setsearchValue(e.target.value);
+    setSearchValue(e.target.value);
   }
   function onSearch(e) {
     e.preventDefault();
     if (searchValue) {
       history.push(`/Products/search?q=${searchValue}`);
-      setsearchValue("");
+      setSearchValue("");
     }
   }
   function renderTotalMoney() {
@@ -71,19 +71,18 @@ const Header = () => {
     return result;
   }
   function onLogout() {
-    setuserDropdown(false);
+    setUserDropDown(false);
     localStorage.removeItem("Authorization");
     dispatch(action.logOutUser());
   }
   return (
     <header>
-      <div class="banner_header">
+      <div style={{ width: "100%" }}>
         <img
-          src={
-            "https://cdn0.fahasa.com/media/wysiwyg/Thang-05-2022/bigsale062022-resize_1263.jpg"
-          }
+          src={"http://localhost:8080/image/product/Maga_Banner_1263x60.jpg"}
           alt=""
-          class="banner-img"
+          // className="banner-img"
+          style={{ width: "100%" }}
         />
       </div>
       <nav
@@ -97,15 +96,15 @@ const Header = () => {
             : {}
         }
       >
-        <div class="container">
-          <div class="nav-wrap">
+        <div className="container">
+          <div className="nav-wrap">
             <Link to="/">
-              <img src={logo} alt="" class="nav-logo" />
+              <img src={logo} alt="" className="nav-logo" />
             </Link>
-            <form class="nav-search" onSubmit={onSearch}>
+            <form className="nav-search" onSubmit={onSearch}>
               <input
                 type="text"
-                class="nav-input"
+                className="nav-input"
                 name="q"
                 value={searchValue}
                 placeholder="Nhập từ khóa cần tìm"
@@ -131,14 +130,14 @@ const Header = () => {
                       <Link
                         to="/user/order"
                         className="header__user__dropdown--link"
-                        onClick={() => setuserDropdown(false)}
+                        onClick={() => setUserDropDown(false)}
                       >
                         Quản lý đơn hàng
                       </Link>
                       <Link
                         to="/user/profile"
                         className="header__user__dropdown--link"
-                        onClick={() => setuserDropdown(false)}
+                        onClick={() => setUserDropDown(false)}
                       >
                         Hồ Sơ
                       </Link>
@@ -146,7 +145,7 @@ const Header = () => {
                         <Link
                           to="/admin/notification"
                           className="header__user__dropdown--link"
-                          onClick={() => setuserDropdown(false)}
+                          onClick={() => setUserDropDown(false)}
                         >
                           Admin
                         </Link>
