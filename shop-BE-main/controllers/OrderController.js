@@ -55,6 +55,7 @@ module.exports = {
 
     var createDate = dateFormat(date, "yyyymmddHHmmss");
     var orderId = dateFormat(date, "HHmmss");
+
     var amount = totalPrice;
     var bankCode = "NCB";
     // var bankCode = "";
@@ -63,6 +64,7 @@ module.exports = {
     var locale = "vn";
     var currCode = "VND";
     var vnp_Params = {};
+
     vnp_Params["vnp_Version"] = "2.1.0";
     vnp_Params["vnp_Command"] = "pay";
     vnp_Params["vnp_TmnCode"] = tmnCode;
@@ -94,7 +96,10 @@ module.exports = {
     console.log(vnpUrl);
 
     //Neu muon dung Redirect thi dong dong ben duoi
+
     // res.json(vnpUrl);
+    // res.status(200).json({ data: vnpUrl });
+
     res.status(200).json({ code: "00", data: vnpUrl });
     //Neu muon dung Redirect thi mo dong ben duoi va dong dong ben tren
     //res.redirect(vnpUrl)
