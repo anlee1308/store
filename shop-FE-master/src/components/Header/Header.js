@@ -28,18 +28,44 @@ const Header = () => {
   const user = useSelector((state) => state.user);
   const [HideHeader, setHideHeader] = useState(false);
   const [userDropdown, setUserDropDown] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
   function DropdownUser() {
     setUserDropDown(!userDropdown);
   }
-  useEffect(() => {
-    window.addEventListener("scroll", (e) => {
-      if (e.target.defaultView.scrollY > 200) {
-        setHideHeader(true);
-      } else {
+
+  const controlNavbar = () => {
+    if (typeof window !== "undefined") {
+      if (window.scrollY > lastScrollY) {
+        // if scroll down hide the navbar
         setHideHeader(false);
+      } else {
+        // if scroll up show the navbar
+        setHideHeader(true);
       }
-    });
-  }, []);
+
+      // remember current page location to use in the next move
+      setLastScrollY(window.scrollY);
+    }
+  };
+
+  useEffect(() => {
+    // window.addEventListener("scrollDown", (e) => {
+    //   if (e) {
+    //     setHideHeader(true);
+    //   } else {
+    //     setHideHeader(false);
+    //   }
+    // });
+
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", controlNavbar);
+
+      // cleanup function
+      return () => {
+        window.removeEventListener("scroll", controlNavbar);
+      };
+    }
+  }, [lastScrollY]);
   const [searchValue, setSearchValue] = useState(null);
   function onChangeValue(e) {
     setSearchValue(e.target.value);

@@ -56,7 +56,7 @@ module.exports = {
     var createDate = dateFormat(date, "yyyymmddHHmmss");
     var orderId = dateFormat(date, "HHmmss");
 
-    var amount = totalPrice;
+    var amount = totalPrice + 30000;
     var bankCode = "NCB";
     // var bankCode = "";
 
@@ -127,10 +127,9 @@ module.exports = {
 
     if (secureHash === signed) {
       //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
-
-      res.render("success", { code: 00, data: "sucess" });
+      res.status(200).json({ code: "00", data: "sucess" });
     } else {
-      res.render("success", { code: "97", data: "failure" });
+      res.status(200).json({ code: "97", data: "failure" });
     }
   },
   // handle payment offline
