@@ -33,7 +33,7 @@ function Order(props) {
           toast.success("Thanh toán thành công");
           dispatch(action.deleteAllCart());
           history.push("/user/order");
-          // setRender(true);
+          setRender(true);
         } else {
           toast.error("Thanh toán thất bại");
         }
