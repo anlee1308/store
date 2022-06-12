@@ -111,6 +111,7 @@ height: 100% !important;
 .product-pk-item-desc-price-old{
     display: flex;
     align-items: center;
+    margin: 0 auto;
 }
 .product-pk-item-desc-price-old span{
     text-decoration: line-through;
