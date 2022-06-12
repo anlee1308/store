@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Tabs } from "antd";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axiosClient from "../../helper/axiosClient";
 import "./Order.css";
 import OrderItem from "../../components/Order/Order";
+import * as action from "../../actions/index";
 import Loader from "react-loader-spinner";
 import { toast } from "react-toastify";
 
@@ -13,6 +14,7 @@ function Order(props) {
     isLoading: false,
     data: [],
   });
+  const dispatch = useDispatch();
   const [render, setRender] = useState(false);
   const { TabPane } = Tabs;
   const history = useHistory();
@@ -29,7 +31,9 @@ function Order(props) {
       }).then((data) => {
         if (data.code == "00") {
           toast.success("Thanh toán thành công");
-          setRender(true);
+          dispatch(action.deleteAllCart());
+          history.push("/user/order");
+          // setRender(true);
         } else {
           toast.error("Thanh toán thất bại");
         }
@@ -47,6 +51,7 @@ function Order(props) {
       url: "http://localhost:8080/api/auth/order",
       method: "get",
     }).then((data) => {
+      data.reverse();
       setListOrder({
         isLoading: false,
         data: data,

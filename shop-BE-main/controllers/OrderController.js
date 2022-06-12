@@ -54,7 +54,7 @@ module.exports = {
     var date = new Date();
 
     var createDate = dateFormat(date, "yyyymmddHHmmss");
-    var orderId = dateFormat(date, "HHmmss");
+    var orderId = orderSave._id + "_" + randomstring.generate(5);
 
     var amount = totalPrice + 30000;
     var bankCode = "NCB";
@@ -115,30 +115,46 @@ module.exports = {
 
     vnp_Params = sortObject(vnp_Params);
 
-    var config = require("config");
-    var tmnCode = config.get("vnp_TmnCode");
-    var secretKey = config.get("vnp_HashSecret");
+    var tmnCode = process.env.vnp_TmnCode;
+    var secretKey = process.env.vnp_HashSecret;
 
     var querystring = require("qs");
     var signData = querystring.stringify(vnp_Params, { encode: false });
     var crypto = require("crypto");
     var hmac = crypto.createHmac("sha512", secretKey);
     var signed = hmac.update(new Buffer(signData, "utf-8")).digest("hex");
+    var idOrder = req.query.vnp_TxnRef.split("_")[0];
 
     if (secureHash === signed) {
-      //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
-      res.status(200).json({ code: "00", data: "sucess" });
+      if (vnp_Params.vnp_ResponseCode == "00") {
+        var UpdateStatusOrder = await OrderModel.findById(idOrder);
+        UpdateStatusOrder.status_order = true;
+        await UpdateStatusOrder.save();
+        return res.json({
+          code: "00",
+          data: "success",
+        });
+      } else {
+        return res.json({
+          code: "97",
+          data: "failure",
+        });
+      }
     } else {
-      res.status(200).json({ code: "97", data: "failure" });
+      return res.json({
+        code: "97",
+        data: "failure",
+      });
     }
   },
   // handle payment offline
   paymentOffline: async (req, res) => {
     const { address, products, payment } = req.body;
     const { _id } = req.user.data;
-    const totalPrice = products.reduce((a, b) => {
+    let totalPrice = products.reduce((a, b) => {
       return a + b.newprice * b.soluong;
     }, 0);
+    totalPrice = totalPrice + 30000;
     try {
       const order = new OrderModel({
         products,
