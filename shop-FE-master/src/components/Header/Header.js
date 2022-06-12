@@ -11,11 +11,6 @@ import icon3 from "../../assets/img/xk3s.png";
 import icon4 from "../../assets/img/xk4s.png";
 import icon5 from "../../assets/img/xk5s.png";
 import transferPrice from "../../helper/TransferPrice";
-import laptop from "../../assets/img/xxx21.png";
-import pc from "../../assets/img/xxx22.png";
-import manhinh from "../../assets/img/xxx26.png";
-import chuot from "../../assets/img/xxx28.png";
-import banphim from "../../assets/img/xxx27.png";
 import * as actions from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
@@ -118,6 +113,7 @@ const Header = () => {
                 position: "fixed",
                 width: "100%",
                 boxShadow: "0px 4px 24px 0px rgba(0, 0, 0, 0.06)",
+                transition: "visibility 0s linear 1s, opacity 1s linear",
               }
             : {}
         }
